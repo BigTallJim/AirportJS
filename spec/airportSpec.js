@@ -1,6 +1,10 @@
 describe('Plane', function() {
-    airport = new Airport();
-    plane1 = new Plane();
+    
+    beforeEach(function() {
+        airport = new Airport();
+        plane1 = new Plane();
+    });
+
 
     it("Lands at an airport", function(){
         airport.landPlane(plane1);
@@ -8,8 +12,19 @@ describe('Plane', function() {
     });
 
     it("Plane takes off, and leaves airport", function(){
+        spyOn(airport, "checkWeather").and.returnValue('Sunny');
         airport.landPlane(plane1);
         airport.takeOffPlane(plane1);
-        expect(airport._planes).toEqual([]);
+        expect(airport._planes.length).toEqual(0);
+    });
+
+    it("Checks whether the weather is stormy", function() {
+        expect(airport.checkWeather(1)).toEqual("Stormy");
+        expect(airport.checkWeather(0)).toEqual("Sunny");
+    });
+
+    it("Prevents takeoff when weather is stormy", function(){
+        spyOn(airport, "checkWeather").and.returnValue('Stormy');
+        expect(function(){airport.takeOffPlane(plane1)}).toThrowError('TOO STORMY!');
     });
 });
