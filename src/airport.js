@@ -1,4 +1,4 @@
-function Airport(size) {
+function Airport(size = 3) {
     this._planes = [];
     this._maxPlanes = size;
     

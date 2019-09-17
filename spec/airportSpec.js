@@ -1,7 +1,7 @@
 describe('Plane', function() {
     
     beforeEach(function() {
-        airport = new Airport(3);
+        airport = new Airport();
         plane1 = new Plane();
         plane2 = new Plane();
         plane3 = new Plane();
